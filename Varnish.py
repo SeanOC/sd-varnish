@@ -11,12 +11,12 @@ class Varnish(object):
     def run(self):
         stats = {}
         varnishstat = subprocess.Popen(
-            ['varnishstat','-1'],
-            stdout=subproces.PIPE,
+            ['varnishstat','-x'],
+            stdout=subprocess.PIPE,
         )
         stats_xml = etree.parse(varnishstat.stdout)
         
-        for stat_node in stats_xml:
+        for stat_node in stats_xml.findall('stat'):
             label = stat_node.findtext('description')
             value = stat_node.findtext('value')
             stats[label] = value
