@@ -1,6 +1,6 @@
 import subprocess
 
-from lxml import etree
+from xml import etree
 
 class Varnish(object):
     def __init__(self, agentConfig, checksLogger, rawConfig):
