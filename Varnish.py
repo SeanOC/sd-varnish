@@ -1,6 +1,6 @@
 import subprocess
 
-from xml import etree
+from xml.etree import ElementTree
 
 class Varnish(object):
     def __init__(self, agentConfig, checksLogger, rawConfig):
@@ -14,7 +14,7 @@ class Varnish(object):
             ['varnishstat','-x'],
             stdout=subprocess.PIPE,
         )
-        stats_xml = etree.parse(varnishstat.stdout)
+        stats_xml = ElementTree.parse(varnishstat.stdout)
         
         for stat_node in stats_xml.findall('stat'):
             label = stat_node.findtext('description')
